@@ -1,39 +1,30 @@
-//your JS code here. If required.
-
-let username=document.getElementById('username');
-let password=document.getElementById('password');
-let checkBox=document.getElementById('checkbox');
-
-document.getElementById('submit').addEventListener('click',(event)=>{
-     event.preventDefault();
-
-    if(checkBox.checked===true){
-        console.log(true);
-        if(username.value.length>0 && password.value.length>0){
-             let info={
-                username:username.value,
-                password:password.value
-             }
-            localStorage.setItem('userCredentials',JSON.stringify(info));
-            alert(`Logged in as ${username.value}`);
-            console.log(info);
-        }
+function handleSubmit(event) {
+      event.preventDefault(); // Prevent form submission
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const rememberMe = document.getElementById('checkbox').checked;
+      
+      if (rememberMe) {
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+      } else {
+        localStorage.removeItem('username');
+        localStorage.removeItem('password');
+      }
+      
+      alert('Logged in as ' + username);
     }
-    else{
-        console.log(false);
-        alert(`Logged in as ${username.value}`);
+    
+    // Function to handle "Login as existing user" button click
+    function handleExistingUserLogin() {
+      const username = localStorage.getItem('username');
+      alert('Logged in as ' + username);
     }
-})
-
-let storedInfo=JSON.parse(localStorage.getItem('userCredentials'));
-
-if(storedInfo){
-    let existingButton=document.createElement('button');
-    existingButton.id='existing';
-    existingButton.innerText='Login as existing user';
-    existingButton.addEventListener('click',()=>{
-        alert(`Logged in as ${storedInfo.username}`);
-    })
-
-    document.getElementsByTagName('form')[0].append(existingButton);
-}
+  
+    // Check if there are saved details
+    const savedUsername = localStorage.getItem('username');
+    if (savedUsername) {
+      const existingButton = document.getElementById('existing');
+      existingButton.style.display = 'inline-block';
+    }
+ 
