@@ -22,9 +22,9 @@ function handleSubmit(event) {
     }
   
     // Check if there are saved details
-    const savedUsername = localStorage.getItem('username');
-    if (savedUsername) {
-      const existingButton = document.getElementById('existing');
-      existingButton.style.display = 'inline-block';
-    }
+    // const savedUsername = localStorage.getItem('username');
+    // if (savedUsername) {
+    //   const existingButton = document.getElementById('existing');
+    //   existingButton.style.display = 'inline-block';
+    // }
  
