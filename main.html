@@ -1,26 +1,60 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <title>Login Form</title>
+  <script>
+    // Function to handle form submission
+    function handleSubmit(event) {
+      event.preventDefault(); // Prevent form submission
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const rememberMe = document.getElementById('checkbox').checked;
+      
+      if (rememberMe) {
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+      } else {
+        localStorage.removeItem('username');
+        localStorage.removeItem('password');
+      }
+      
+      alert('Logged in as ' + username);
+    }
+    
+    // Function to handle "Login as existing user" button click
+    function handleExistingUserLogin() {
+      const username = localStorage.getItem('username');
+      alert('Logged in as ' + username);
+    }
+  </script>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-	<h1>Login Form</h1>
-	<form >
-		<label for="username">Username</label>
-		<input type="text" id="username" placeholder="Username" required><br>
-		<label for="password">Password</label>
-		<input type="password" id="password" placeholder="Password" required><br>
-		<input type="checkbox" name="rememberMe" id="checkbox">
-		<label for="checkbox" >Remember me</label><br>
-		<input type="submit" value="Submit" id="submit">
-	</form>
-    <script type="text/javascript" src="./script.js">
-</script>
+  <h1>Login Form</h1>
 
+  <form onsubmit="handleSubmit(event)">
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Username" required><br><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    
+    <input type="checkbox" id="checkbox">
+    <label for="checkbox">Remember me</label><br><br>
+    
+    <input type="submit" id="submit" value="Submit">
+  </form>
+
+  <br>
+
+  <button id="existing" onclick="handleExistingUserLogin()">Login as existing user</button>
+  
+  <script>
+    // Check if there are saved details
+    const savedUsername = localStorage.getItem('username');
+    if (savedUsername) {
+      const existingButton = document.getElementById('existing');
+      existingButton.style.display = 'inline-block';
+    }
+  </script>
 </body>
-
 </html>
